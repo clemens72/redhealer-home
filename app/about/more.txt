@@ -1,0 +1,245 @@
+      {/* Philosophy Section */}
+      <section className="py-16 bg-accent">
+        <div className="content-container">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="text-3xl font-bold mb-6">Our Philosophy</h2>
+            <p className="text-lg text-muted-foreground">
+              At the heart of Red Healer is a belief in music's power to connect, heal, and transform. 
+              We approach each song as an opportunity to create meaningful experiences that resonate with listeners.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Music className="h-10 w-10 text-primary" />,
+                title: "Authentic Expression",
+                description: "We create music that comes from genuine experiences and emotions, never compromising our artistic integrity."
+              },
+              {
+                icon: <Heart className="h-10 w-10 text-primary" />,
+                title: "Healing Through Sound",
+                description: "Our music aims to create spaces for healing, reflection, and emotional connection for our listeners."
+              },
+              {
+                icon: <Award className="h-10 w-10 text-primary" />,
+                title: "Community Building",
+                description: "We believe in using our platform to build community and support causes that align with our values."
+              }
+            ].map((item, index) => (
+              <div 
+                key={index} 
+                className="bg-card p-6 rounded-lg shadow-md border border-border text-center"
+              >
+                <div className="mb-4 inline-flex items-center justify-center">{item.icon}</div>
+                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                <p className="text-muted-foreground">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Band Members Section */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="content-container">
+          <h2 className="text-3xl font-bold mb-12 text-center">Meet The Band</h2>
+
+          {/* Alex Rivera */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16 items-center">
+            <div className="md:col-span-4 order-1">
+              <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="https://images.pexels.com/photos/1646870/pexels-photo-1646870.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt="Alex Rivera"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+            </div>
+            <div className="md:col-span-8 order-2">
+              <h3 className="text-2xl font-bold mb-2">Alex Rivera</h3>
+              <p className="text-primary font-medium mb-4">Vocals & Guitar</p>
+              <Separator className="mb-4" />
+              <p className="text-muted-foreground mb-4">
+                Alex's soulful voice and intricate guitar work form the backbone of Red Healer's sound. 
+                Growing up in New Mexico, he was influenced by a blend of folk traditions, desert blues, 
+                and indie rock that shape his distinctive songwriting style.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                "Music has always been my way of making sense of the world. Each song is a chance to 
+                connect with something larger than myself and hopefully bring some healing to whoever is listening."
+              </p>
+              <div className="flex gap-4">
+                <Button variant="outline" size="sm">
+                  Full Bio
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Maya Johnson */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16 items-center">
+            <div className="md:col-span-8 order-2 md:order-1">
+              <h3 className="text-2xl font-bold mb-2">Maya Johnson</h3>
+              <p className="text-primary font-medium mb-4">Drums & Percussion</p>
+              <Separator className="mb-4" />
+              <p className="text-muted-foreground mb-4">
+                Maya's dynamic percussion brings both power and nuance to the band's sound. With a background in 
+                jazz and world music, she creates rhythmic landscapes that elevate each song to new heights.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                "Rhythm is the heartbeat of music. I love finding that perfect pocket where everything just flows 
+                and the audience can feel it in their bodies. That's when you know something special is happening."
+              </p>
+              <div className="flex gap-4">
+                <Button variant="outline" size="sm">
+                  Full Bio
+                </Button>
+              </div>
+            </div>
+            <div className="md:col-span-4 order-1 md:order-2">
+              <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt="Maya Johnson"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* James Thompson */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-4 order-1">
+              <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt="James Thompson"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+            </div>
+            <div className="md:col-span-8 order-2">
+              <h3 className="text-2xl font-bold mb-2">James Thompson</h3>
+              <p className="text-primary font-medium mb-4">Bass & Backing Vocals</p>
+              <Separator className="mb-4" />
+              <p className="text-muted-foreground mb-4">
+                James provides the sonic foundation that anchors the band. His melodic bass lines and harmonies 
+                add depth and richness to Red Healer's arrangements and live performances.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                "The bass is this beautiful bridge between rhythm and melody. I'm always looking for ways to 
+                support the song while adding those subtle elements that might only be noticed on the third or 
+                fourth listen."
+              </p>
+              <div className="flex gap-4">
+                <Button variant="outline" size="sm">
+                  Full Bio
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline Section */}
+      <section className="py-16 bg-card">
+        <div className="content-container">
+          <h2 className="text-3xl font-bold mb-12 text-center">Our Journey</h2>
+          
+          <div className="relative border-l border-primary pl-8 ml-4 md:ml-[calc(50%-4px)] space-y-16 py-4">
+            {[
+              {
+                year: "2015",
+                title: "Formation",
+                description: "Alex and Maya meet at an open mic night in Austin and begin collaborating."
+              },
+              {
+                year: "2016",
+                title: "First EP Release",
+                description: "The band releases their first self-titled EP and begins performing at local venues."
+              },
+              {
+                year: "2018",
+                title: "National Tour",
+                description: "Red Healer embarks on their first national tour, supporting established indie folk acts."
+              },
+              {
+                year: "2019",
+                title: "Spirit Dance Album",
+                description: "Release of the band's first full-length album to critical acclaim."
+              },
+              {
+                year: "2020",
+                title: "Mystic River",
+                description: "During the pandemic, the band creates their most introspective album to date."
+              },
+              {
+                year: "2022",
+                title: "Desert Roads Tour",
+                description: "A triumphant return to touring with the Desert Roads album and festival appearances."
+              },
+              {
+                year: "2024",
+                title: "Healing Echoes",
+                description: "The band's latest album showcases their musical evolution and growing audience."
+              }
+            ].map((event, index) => (
+              <div 
+                key={index} 
+                className="relative md:grid md:grid-cols-2 gap-8 items-center"
+              >
+                <div className="absolute -left-12 bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center">
+                  <span className="sr-only">Timeline dot</span>
+                </div>
+                
+                <div className={`md:text-right ${index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'}`}>
+                  <h3 className="text-xl font-bold">{event.title}</h3>
+                  <p className="text-primary font-medium mb-2">{event.year}</p>
+                  <p className="text-muted-foreground">{event.description}</p>
+                </div>
+                
+                <div className={index % 2 === 0 ? 'md:col-start-2' : 'md:col-start-1 md:row-start-1'}>
+                  {/* Placeholder for potential images */}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="content-container">
+          <h2 className="text-3xl font-bold mb-12 text-center">What People Say</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "Red Healer crafts the kind of transcendent folk-rock that feels both timeless and urgently of the moment.",
+                source: "Rolling Stone Magazine"
+              },
+              {
+                quote: "Healing Echoes is a masterclass in sonic landscape painting, with lyrics that cut straight to the soul.",
+                source: "NPR Music"
+              },
+              {
+                quote: "Their live show transforms venues into sacred spaces where music becomes a communal healing experience.",
+                source: "Austin Chronicle"
+              }
+            ].map((testimonial, index) => (
+              <div 
+                key={index} 
+                className="bg-card p-8 rounded-lg shadow-md border border-border"
+              >
+                <div className="text-4xl text-primary mb-4">"</div>
+                <p className="text-lg mb-4 italic">{testimonial.quote}</p>
+                <p className="text-right font-bold">— {testimonial.source}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
