@@ -6,7 +6,6 @@ import { Card, CardContent } from '@/components/ui/card'
 
 import woof from '../../public/woofsingle.png'
 import cashmerefeel from '../../public/cashmerefeel.jpg'
-import quarantep from '../../public/quarantep.jpg'
 
 
 const albums = [
@@ -21,12 +20,6 @@ const albums = [
     year: "2024",
     cover: woof,
     link: "/music/woof"
-  },
-  {
-    title: "QuarantEP",
-    year: "2020",
-    cover: quarantep,
-    link: "/music/quarantep"
   },
   {
     title: "Cashmere Feel",
