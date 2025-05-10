@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   title: 'Red Healer Band | Official Website',
   description: 'Official website of Red Healer Band - Music, Tour Dates, and More',
   icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
+    icon: 'https://raw.githubusercontent.com/clemens72/redhealer-home/d6965f9ab942d3d80bc5a42bd722777a2a39a48f/public/Favicon.png',
+    shortcut: 'https://raw.githubusercontent.com/clemens72/redhealer-home/d6965f9ab942d3d80bc5a42bd722777a2a39a48f/public/Favicon.png',
+    apple: 'https://raw.githubusercontent.com/clemens72/redhealer-home/d6965f9ab942d3d80bc5a42bd722777a2a39a48f/public/Favicon.png',
   },
 };
 

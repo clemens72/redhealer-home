@@ -71,11 +71,11 @@ export default function Home() {
               <AudioPlayer
                 tracks={[
                   {
-                    url: "http://localhost:3000/woof.mp3",
+                    url: "https://raw.githubusercontent.com/clemens72/redhealer-home/d6965f9ab942d3d80bc5a42bd722777a2a39a48f/public/woof.mp3",
                     title: "Woof!"
                   },
                   {
-                    url: "http://localhost:3000/cruise.mp3",
+                    url: "https://raw.githubusercontent.com/clemens72/redhealer-home/d6965f9ab942d3d80bc5a42bd722777a2a39a48f/public/cruise.mp3",
                     title: "Cruise"
                   }
                 ]}
