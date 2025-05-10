@@ -2,11 +2,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { PlayCircle, Calendar, Headphones, Disc, Users, Mail } from 'lucide-react'
-import { Separator } from '@/components/ui/separator'
+import { PlayCircle, Calendar, Disc, Users, Mail } from 'lucide-react'
 import MusicSection from '@/components/home/MusicSection'
 import TourSection from '@/components/home/TourSection'
 import NewsletterSection from '@/components/home/NewsletterSection'
+import AudioPlayer from '@/components/AudioPlayer'
 
 import woof from '../public/woofsingle.png'
 import rhlive from '../public/rhlive.jpg'
@@ -32,7 +32,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 hero-gradient" />
         </div>
-        
+
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white animate-fade-in mb-4 text-shadow">
             RED HEALER
@@ -73,17 +73,14 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">1. Woof!</span>
-                  <span className="text-muted-foreground">4:32</span>
-                </div>
-                <Separator />
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">2. Cruise</span>
-                  <span className="text-muted-foreground">3:58</span>
-                </div>
-              </div>
+              <AudioPlayer
+                url="http://localhost:3000/woof.mp3"
+                title="Woof!"
+              />
+              <AudioPlayer
+                url="http://localhost:3000/cruise.mp3"
+                title="Cruise"
+              />
             </div>
 
             <div className="relative animate-fade-in delay-100">
@@ -121,8 +118,8 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center mb-12 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">About The Band</h2>
             <p className="text-muted-foreground text-lg">
-            Red Healer fuses folk and soul with light-hearted lyricism that never takes itself too seriously.
-            Inspired by the energy of the red heeler (Australian cattle dog).
+              Red Healer fuses folk and soul with light-hearted lyricism that never takes itself too seriously.
+              Inspired by the energy of the red heeler (Australian cattle dog).
             </p>
           </div>
 
@@ -207,9 +204,9 @@ export default function Home() {
             Looking to bring Red Healer to your venue, festival, or private event?
             We'd love to hear from you!
           </p>
-          <Button 
-            size="lg" 
-            variant="outline" 
+          <Button
+            size="lg"
+            variant="outline"
             className="bg-transparent border-white/40 hover:bg-white/10 animate-fade-in delay-200"
             asChild
           >
