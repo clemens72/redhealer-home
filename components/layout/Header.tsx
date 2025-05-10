@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ThemeToggle } from '@/components/ThemeToggle'
 import Image from 'next/image'
 
 const navigation = [
@@ -23,7 +22,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      setIsScrolled(window.scrollY > 0)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -38,7 +37,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="https://raw.githubusercontent.com/clemens72/redhealer-home/d6965f9ab942d3d80bc5a42bd722777a2a39a48f/public/Favicon.png"
+              src="/favicon.png"
               alt="Red Healer"
               width={32}
               height={32}
@@ -62,9 +61,6 @@ export default function Header() {
               {item.name}
             </Link>
           ))}
-          <div className="ml-2">
-            <ThemeToggle />
-          </div>
           <Button size="sm" variant="default" asChild>
             <a href="/#latest-release">Listen Now</a>
           </Button>
@@ -72,7 +68,6 @@ export default function Header() {
 
         {/* Mobile navigation */}
         <div className="flex items-center md:hidden">
-          <ThemeToggle />
           <Button 
             variant="ghost" 
             size="icon" 
@@ -86,26 +81,26 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md animate-fade-in">
-          <div className="space-y-1 px-4 py-5">
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 bg-background/95 backdrop-blur-md shadow-lg">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  'block py-3 text-base font-medium transition-colors hover:text-primary',
-                  pathname === item.href ? 'text-primary' : 'text-foreground/80'
+                  'block px-3 py-2 rounded-md text-base font-medium transition-colors',
+                  pathname === item.href ? 'text-primary' : 'text-foreground/80 hover:text-primary'
                 )}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            <div className="pt-4">
-              <Button className="w-full" size="sm" asChild>
-                <a href="/#latest-release">Listen Now</a>
-              </Button>
-            </div>
+            <Button size="sm" variant="default" className="w-full mt-2" asChild>
+              <a href="/#latest-release" onClick={() => setMobileMenuOpen(false)}>
+                Listen Now
+              </a>
+            </Button>
           </div>
         </div>
       )}
