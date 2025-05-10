@@ -250,21 +250,11 @@ export default function ContactPage() {
                   </div>
                   
                   <div className="flex items-start">
-                    <Phone className="h-5 w-5 text-primary mt-1 mr-3" />
-                    <div>
-                      <h3 className="font-semibold">Phone</h3>
-                      <a href="tel:+15125551234" className="text-muted-foreground hover:text-primary">
-                        (512) 555-1234
-                      </a>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
                     <MapPin className="h-5 w-5 text-primary mt-1 mr-3" />
                     <div>
                       <h3 className="font-semibold">Location</h3>
                       <p className="text-muted-foreground">
-                        Austin, Texas, USA
+                        Columbus, Ohio, USA
                       </p>
                     </div>
                   </div>

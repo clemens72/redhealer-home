@@ -1,16 +1,23 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Headphones, Instagram, Facebook, Twitter, Youtube, Mail } from 'lucide-react'
+import { Instagram, Facebook, Twitter, Youtube, Mail } from 'lucide-react'
 
 export default function Footer() {
   return (
     <footer className="bg-card text-card-foreground">
       <div className="content-container py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Headphones className="h-6 w-6 text-primary" />
+              <Image
+                src="/favicon.png"
+                alt="Red Healer"
+                width={24}
+                height={24}
+                className="h-6 w-6"
+              />
               <span className="text-lg font-playfair font-bold">Red Healer</span>
             </Link>
             <p className="text-muted-foreground mb-4">
@@ -33,34 +40,13 @@ export default function Footer() {
           <div className="md:col-span-1">
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {['Home', 'About', 'Music', 'Tour', 'Gallery', 'Contact'].map((item) => (
+              {['Home', 'About', 'Tour', 'Contact'].map((item) => (
                 <li key={item}>
                   <Link 
                     href={`/${item.toLowerCase() === 'home' ? '' : item.toLowerCase()}`}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Latest Releases</h3>
-            <ul className="space-y-2">
-              {[
-                'Cruise (2024)',
-                'Woof! (2024)',
-                'QuarantEP (2020)',
-                'Cashmere Feel (2019)',
-              ].map((album) => (
-                <li key={album}>
-                  <Link 
-                    href="/music" 
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {album}
                   </Link>
                 </li>
               ))}

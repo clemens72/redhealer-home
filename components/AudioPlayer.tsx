@@ -2,15 +2,22 @@
 
 import * as React from 'react';
 
-interface AudioPlayerProps {
+interface Track {
   url: string;
   title: string;
+  duration?: number;
+}
+
+interface AudioPlayerProps {
+  tracks: Track[];
 }
 
 const paperStyle = {
   padding: '24px',
   borderRadius: '8px',
   boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+  backgroundColor: 'var(--background)',
+  color: 'var(--foreground)',
 };
 
 const headingStyle = {
@@ -50,13 +57,15 @@ const iconButtonStyle = {
   padding: '8px',
   borderRadius: '50%',
   border: 'none',
-  backgroundColor: 'white',
+  backgroundColor: 'var(--accent)',
+  color: 'var(--foreground)',
   cursor: 'pointer',
-  transition: 'transform 0.2s',
+  transition: 'all 0.2s',
   '&:hover': {
     transform: 'scale(1.1)',
+    backgroundColor: 'var(--accent-hover)',
   },
-  display: 'flex', // added for icon centering
+  display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 };
@@ -76,35 +85,111 @@ const timeTextStyle = {
   letterSpacing: '0.03333em',
 };
 
+const trackButtonStyle = {
+  padding: '12px 16px',
+  backgroundColor: 'var(--background)',
+  cursor: 'pointer',
+  transition: 'all 0.2s',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  border: 'none',
+  textAlign: 'left' as const,
+  color: 'var(--foreground)',
+  '&:hover': {
+    backgroundColor: 'var(--accent)',
+  },
+};
+
+const activeTrackButtonStyle = {
+  ...trackButtonStyle,
+  backgroundColor: 'var(--accent)',
+  fontWeight: '500',
+};
+
+const trackListStyle = {
+  display: 'flex',
+  flexDirection: 'column' as const,
+  gap: '4px',
+  marginTop: '8px',
+};
+
+const trackDurationStyle = {
+  color: 'var(--muted-foreground)',
+  fontSize: '0.875rem',
+};
+
 const PlayArrowIconComponent = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" style={{ fill: 'currentColor' }}>
         <path d="M8 5v14l11-7z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
 );
 
 const PauseIconComponent = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" style={{ fill: 'currentColor' }}>
         <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
 );
   
+const sliderStyle: React.CSSProperties = {
+  width: '100%',
+  height: '6px',
+  borderRadius: '5px',
+  background: 'var(--accent)',
+  outline: 'none',
+  WebkitAppearance: 'none',
+  appearance: 'none' as const,
+};
 
-export default function AudioPlayer({ url, title }: AudioPlayerProps) {
+const sliderThumbStyle = {
+  WebkitAppearance: 'none',
+  appearance: 'none',
+  width: '12px',
+  height: '12px',
+  borderRadius: '50%',
+  background: 'var(--primary)',
+  cursor: 'pointer',
+};
+
+export default function AudioPlayer({ tracks }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentTime, setCurrentTime] = React.useState(0);
   const [duration, setDuration] = React.useState(0);
+  const [currentTrackIndex, setCurrentTrackIndex] = React.useState(0);
+  const [trackDurations, setTrackDurations] = React.useState<number[]>([]);
   const audioRef = React.useRef<HTMLAudioElement>(null);
 
+  const currentTrack = tracks[currentTrackIndex];
+
+  // Load durations for all tracks
   React.useEffect(() => {
-    // Reset player state when URL changes
+    const loadDurations = async () => {
+      const durations = await Promise.all(
+        tracks.map(track => {
+          return new Promise<number>((resolve) => {
+            const audio = new Audio(track.url);
+            audio.addEventListener('loadedmetadata', () => {
+              resolve(audio.duration);
+            });
+          });
+        })
+      );
+      setTrackDurations(durations);
+    };
+    loadDurations();
+  }, [tracks]);
+
+  React.useEffect(() => {
+    // Reset player state when track changes
     setIsPlaying(false);
     setCurrentTime(0);
     if (audioRef.current) {
       setDuration(audioRef.current.duration);
     }
-  }, [url]);
+  }, [currentTrackIndex]);
 
   const handlePlayPause = () => {
     if (audioRef.current) {
@@ -153,16 +238,30 @@ export default function AudioPlayer({ url, title }: AudioPlayerProps) {
     <div style={paperStyle}>
       <audio
         ref={audioRef}
-        src={url}
+        src={currentTrack.url}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={() => setIsPlaying(false)}
       />
      
       <div style={stackStyle}>
-      <h2 style={headingStyle}>
-        {title}
-      </h2>
+        <div style={{ marginBottom: '16px' }}>
+          <div style={trackListStyle}>
+            {tracks.map((track, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentTrackIndex(index)}
+                style={index === currentTrackIndex ? activeTrackButtonStyle : trackButtonStyle}
+              >
+                <span>{track.title}</span>
+                <span style={trackDurationStyle}>
+                  {trackDurations[index] ? formatTime(trackDurations[index]) : '--:--'}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Playback Progress */}
         <div style={playbackContainerStyle}>
           <button style={iconButtonStyle} onClick={handlePlayPause}>
@@ -170,7 +269,7 @@ export default function AudioPlayer({ url, title }: AudioPlayerProps) {
           </button>
 
           <div style={progressBarStyle}>
-            <span style={timeTextStyle}>
+            <span style={{...timeTextStyle, color: 'var(--muted-foreground)'}}>
               {formatTime(currentTime)}
             </span>
             <input
@@ -179,15 +278,9 @@ export default function AudioPlayer({ url, title }: AudioPlayerProps) {
               max={duration}
               onChange={handleTimeSliderChange}
               aria-label="time-indicator"
-              style={{
-                width: '100%',
-                height: '6px',
-                borderRadius: '5px',
-                background: '#d3d3d3',
-                outline: 'none',
-              }}
+              style={sliderStyle}
             />
-            <span style={timeTextStyle}>
+            <span style={{...timeTextStyle, color: 'var(--muted-foreground)'}}>
               {formatTime(duration)}
             </span>
           </div>

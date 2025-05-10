@@ -4,16 +4,15 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Headphones, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from '@/components/ThemeToggle'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
-  { name: 'Music', href: '/music' },
   { name: 'Tour', href: '/tour' },
-  { name: 'Gallery', href: '/gallery' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -38,7 +37,13 @@ export default function Header() {
       <div className="content-container flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
-            <Headphones className="h-8 w-8 text-primary" />
+            <Image
+              src="/favicon.png"
+              alt="Red Healer"
+              width={32}
+              height={32}
+              className="h-8 w-8"
+            />
             <span className="text-xl font-playfair font-bold">Red Healer</span>
           </Link>
         </div>
@@ -60,8 +65,8 @@ export default function Header() {
           <div className="ml-2">
             <ThemeToggle />
           </div>
-          <Button size="sm" variant="default">
-            Listen Now
+          <Button size="sm" variant="default" asChild>
+            <a href="/#latest-release">Listen Now</a>
           </Button>
         </nav>
 
@@ -97,8 +102,8 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-4">
-              <Button className="w-full" size="sm">
-                Listen Now
+              <Button className="w-full" size="sm" asChild>
+                <a href="/#latest-release">Listen Now</a>
               </Button>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Calendar, MapPin, Clock, ExternalLink, Ticket } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // Sample tour data
 const tourDates = [
@@ -44,12 +44,22 @@ const tourDates = [
   }
 ]
 
-export default function TourSection() {
+export default function TourSection({ id }: { id?: string }) {
   const [showAll, setShowAll] = useState(false)
   const displayedTours = showAll ? tourDates : tourDates.slice(0, 4)
 
+  useEffect(() => {
+    // Check if we're at the tour section via hash
+    if (window.location.hash === '#tour') {
+      const element = document.getElementById('tour')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }, [])
+
   return (
-    <section className="section-spacing bg-background">
+    <section id={id} className="section-spacing bg-accent">
       <div className="content-container">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
           <div className="md:max-w-xl text-center md:text-left">
